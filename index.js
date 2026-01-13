@@ -21,6 +21,9 @@ connection.connect((err) => {
   }
 });
 
+// Serve static files from the public directory
+app.use(express.static("pages"));
+
 // Start the server
 app.listen(3000, () => {
     console.log("Server started of port 3000")
