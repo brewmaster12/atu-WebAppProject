@@ -3,10 +3,30 @@
 <head>
 </head>
 <body>
-    <h1>ITEM: <%= product %></h1>
+    <h1 id="product"><%= product %></h1>
     <h2>Author: <%= author %></h2>
     <img src="/images/<%= myImage%>" height="400px">
+    <p id="price"><%= price%></p>
+
+    <select id="quantity" name="quantity">
+        <option value="1" selected>1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <button onclick="addToCart()">Add to cart</button>
 
     <a href="./">Back to Home page</a>
 </body>
 </html>
+
+<script>
+    function addToCart() {
+        let product = document.getElementById("product").innerHTML;
+        let quantity = document.getElementById("quantity").value;
+        let price = document.getElementById("price").innerHTML;
+        let quan_price = {p: price, quan: quantity};
+        localStorage.setItem(product, JSON.stringify(quan_price));
+    }
+</script>
