@@ -6,6 +6,9 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Set view engine
+app.set("view engine", "ejs");
+
 // Import authentication module
 const auth = require("./auth.js");
 
@@ -56,6 +59,25 @@ app.get("/shop", function(req, res) {
   });
 });
 
+// Route to handle login form submisison
+app.post("/login", function(req, res) {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  const authenticated = auth(username, password);
+  console.log(authenticated);
+
+  // Check if authentication is successful
+  if(authenticated) {
+    console.log("Authentication was successful!");
+    res.render("summary");
+  } else {
+    console.log("Authentication was NOT successful!");
+    res.render("failed");
+  }
+
+});
+
 // POST request
 app.post("/shop", function(req, res) {
   const ID = req.body.rec2;
@@ -76,7 +98,7 @@ app.post("/shop", function(req, res) {
       // Inject data into a HTML
       const bookTitle = rows[0].Title;
       const bookAuthor = rows[0].Author;
-      res.render("renderProduct.ejs", {product: bookTitle, author: bookAuthor});
+      res.render("product.ejs", {product: bookTitle, author: bookAuthor});
     }
   });
 });
