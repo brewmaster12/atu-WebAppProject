@@ -1,8 +1,13 @@
 // Import express
 const express = require("express");
 const app = express();
+
+// Required for the POST request to work
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Import authentication module
+const auth = require("./auth.js");
 
 //Connect to database:
 const mysql = require('mysql');
@@ -51,7 +56,7 @@ app.get("/shop", function(req, res) {
   });
 });
 
-// POST requests
+// POST request
 app.post("/shop", function(req, res) {
   const ID = req.body.rec2;
   connection.query("SELECT * FROM books WHERE id = ?", [ID], function (err, rows, fields) {
