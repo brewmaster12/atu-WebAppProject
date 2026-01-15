@@ -54,7 +54,8 @@ app.get("/shop", function(req, res) {
       // Inject data into a HTML
       const bookTitle = rows[0].Title;
       const bookAuthor = rows[0].Author;
-      res.render("renderProduct.ejs", {product: bookTitle, author: bookAuthor});
+      const image = rows[0].Image;
+      res.render("product.ejs", {product: bookTitle, author: bookAuthor, myImage: image});
     }
   });
 });
