@@ -39,24 +39,25 @@ app.get("/shop", function(req, res) {
   const ID = req.query.rec;
   connection.query("SELECT * FROM books WHERE id = ?", [ID], function (err, rows, fields) {
     if (err) {
-      console.error('Error retrieving data from database: ', err);
       res.status(500).send('Error retrieving data from database');
     } else if (rows.length === 0) {
-      console.error(`No rows found for ID ${ID}`);
       res.status(404).send(`No product found for ID ${ID}`);
     } else {
-      console.log('Data retrieved from database!');
-      console.log(rows[0].Title);
-      console.log(rows[0].Author);
-      console.log(rows[0].Publisher);
-      console.log(rows[0].Price);
-      console.log(rows[0].Image);
       // Inject data into a HTML
       const bookTitle = rows[0].Title;
       const bookAuthor = rows[0].Author;
       const image = rows[0].Image;
+      const publisher = rows[0].Publisher;
       const price = rows[0].Price;
-      res.render("product.ejs", {product: bookTitle, author: bookAuthor, myImage: image, price: price});
+      const blurb = rows[0].Blurb;
+      res.render("product.ejs", {
+        product: bookTitle,
+        author: bookAuthor,
+        publisher: publisher,
+        myImage: image,
+        price: price,
+        blurb: blurb,
+      });
     }
   });
 });
@@ -71,9 +72,11 @@ app.post("/login", function(req, res) {
 
   // Check if authentication is successful
   if(authenticated) {
+    // Successful - take user to checkout page
     console.log("Authentication was successful!");
     res.render("checkout");
   } else {
+    // Unsuccessful - take user back to login page
     console.log("Authentication was NOT successful!");
     res.render("failed");
   }
