@@ -45,7 +45,7 @@
         let product = localStorage.key(i);
         let content = JSON.parse(localStorage.getItem(product));
         let total_cost = content.quan * content.p;
-        total_charge =+ total_cost;
+        total_charge += total_cost;
         if(content.quan > 0) {
             document.getElementById("cart_items").innerHTML +=  product + " x " + content.quan + " = €" + total_cost + "<br>";
         }
