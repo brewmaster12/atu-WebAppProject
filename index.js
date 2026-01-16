@@ -80,31 +80,6 @@ app.post("/login", function(req, res) {
 
 });
 
-// POST request
-app.post("/shop", function(req, res) {
-  const ID = req.body.rec2;
-  connection.query("SELECT * FROM books WHERE id = ?", [ID], function (err, rows, fields) {
-    if (err) {
-      console.error('Error retrieving data from database: ', err);
-      res.status(500).send('Error retrieving data from database');
-    } else if (rows.length === 0) {
-      console.error(`No rows found for ID ${ID}`);
-      res.status(404).send(`No product found for ID ${ID}`);
-    } else {
-      console.log('Data retrieved from database!');
-      console.log(rows[0].Title);
-      console.log(rows[0].Author);
-      console.log(rows[0].Publisher);
-      console.log(rows[0].Price);
-      console.log(rows[0].Image);
-      // Inject data into a HTML
-      const bookTitle = rows[0].Title;
-      const bookAuthor = rows[0].Author;
-      res.render("product.ejs", {product: bookTitle, author: bookAuthor});
-    }
-  });
-});
-
 // Start the server
 app.listen(3000, () => {
     console.log("Server started of port 3000")
