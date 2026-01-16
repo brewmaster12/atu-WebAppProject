@@ -55,7 +55,8 @@ app.get("/shop", function(req, res) {
       const bookTitle = rows[0].Title;
       const bookAuthor = rows[0].Author;
       const image = rows[0].Image;
-      res.render("product.ejs", {product: bookTitle, author: bookAuthor, myImage: image});
+      const price = rows[0].Price;
+      res.render("product.ejs", {product: bookTitle, author: bookAuthor, myImage: image, price: price});
     }
   });
 });
@@ -71,7 +72,7 @@ app.post("/login", function(req, res) {
   // Check if authentication is successful
   if(authenticated) {
     console.log("Authentication was successful!");
-    res.render("summary");
+    res.render("checkout");
   } else {
     console.log("Authentication was NOT successful!");
     res.render("failed");
