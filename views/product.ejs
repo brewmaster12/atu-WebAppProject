@@ -28,5 +28,6 @@
         let price = document.getElementById("price").innerHTML;
         let quan_price = {p: price, quan: quantity};
         localStorage.setItem(product, JSON.stringify(quan_price));
+        alert("Added to cart!");
     }
 </script>
