@@ -32,12 +32,17 @@
 </html>
 
 <script>
+    // Adds items to "cart" in local storage when button is clicked
     function addToCart() {
+        // Assign elements to variables
         let product = document.getElementById("product").innerHTML;
         let quantity = document.getElementById("quantity").value;
         let price = document.getElementById("price").innerHTML;
+        // Creates an object to store price and quantity as one entity
         let quan_price = {p: price, quan: quantity};
+        // Pushes the item and "quan_price" to local storage; "quan_price" object is converted into a string
         localStorage.setItem(product, JSON.stringify(quan_price));
+        // Alerts the user that the items have been addded successfully
         alert("Added to cart!");
     }
 </script>

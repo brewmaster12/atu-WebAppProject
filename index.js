@@ -38,18 +38,21 @@ app.use(express.static("pages"));
 app.get("/shop", function(req, res) {
   const ID = req.query.rec;
   connection.query("SELECT * FROM books WHERE id = ?", [ID], function (err, rows, fields) {
+    // Error handling
     if (err) {
       res.status(500).send('Error retrieving data from database');
     } else if (rows.length === 0) {
       res.status(404).send(`No product found for ID ${ID}`);
     } else {
       // Inject data into a HTML
+      // Assigns data to variables
       const bookTitle = rows[0].Title;
       const bookAuthor = rows[0].Author;
       const image = rows[0].Image;
       const publisher = rows[0].Publisher;
       const price = rows[0].Price;
       const blurb = rows[0].Blurb;
+      // Prints the data to the product.ejs page
       res.render("product.ejs", {
         product: bookTitle,
         author: bookAuthor,

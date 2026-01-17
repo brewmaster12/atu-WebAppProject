@@ -47,16 +47,23 @@
 </html>
 
 <script>
-    // Display the shopping basket items and charges
+    // Display the cart content and charges
+    // Initialise total charge variable
     let total_charge = 0;
+    // Iterate through all items in local storage
     for(i = 0; i < localStorage.length; i++) {
         let product = localStorage.key(i);
         let content = JSON.parse(localStorage.getItem(product));
+        // Multiplies the price of the item and the quantity
         let total_cost = content.quan * content.p;
+        // Adds it to the total charge
         total_charge += total_cost;
+        // If the cart isn't empty ...
         if(content.quan > 0) {
+            // Prints the cart contents to the page
             document.getElementById("cart_items").innerHTML +=  product + " x " + content.quan + " = €" + total_cost + "<br>";
         }
+        // Prints the total charge to the page
         document.getElementById("order_total").innerHTML = "TOTAL = €" + total_charge;
     }
 
@@ -64,9 +71,9 @@
     document.getElementById("purchaseForm").addEventListener("submit", function(event) {
         // Prevent default form submission
         event.preventDefault();
-        // Clear localStorage
+        // Clears local storage
         localStorage.clear();
-        // Show alert message
+        // Alert user that the order was successfuly
         alert("Thank you for your order! You will now be taken back to the home page.");
         // Redirect to home page (index.html) after the alert
         window.location.href = "index.html";
