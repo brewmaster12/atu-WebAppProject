@@ -11,16 +11,34 @@
         body {
             background-color: bisque;
         }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+      }
     </style>
 </head>
 <body>
+    <!-- Code taken from Week 13; checkout.html -->
     <div class="container">
       <h1>Checkout</h1>
 
-      <h2 id="cart_items"></h2>
-      <h2 id="order_total"></h2>
+      <!-- Elements content will be rendered into -->
+      <h4 id="cart_items"></h4>
+      <h3 id="order_total"></h3>
 
 
+      <!-- Purchase form -->
       <form id="purchaseForm">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
@@ -39,7 +57,7 @@
         </select>
 
         <button type="submit">Place Order</button>
-        <a href="index.html">Back to shop</a>
+        <a href="index.html"><button class="btn btn-primary btn-block">Back to shop</button></a>
 
       </form>
     
